@@ -65,7 +65,7 @@ public class ContaBancaria {
 
     private void taxaUsoChequeEspecial() {
         if (this.getLimiteChequeEspecial() > this.getChequeEspecial()) {
-            this.setTaxaDeUso((this.getLimiteChequeEspecial() - this.getChequeEspecial())* 0.2);
+            this.setTaxaDeUso((this.getLimiteChequeEspecial() - this.getChequeEspecial()) * 0.2);
             this.setChequeEspecial(this.getChequeEspecial() - this.getTaxaDeUso());
             System.out.println("Ultrapassou seu saldo. Taxa de uso aplicada R$" + this.getTaxaDeUso());
         }
