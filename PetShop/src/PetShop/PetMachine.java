@@ -4,14 +4,14 @@ public class PetMachine {
     private double agua;
     private double shampoo;
     private Pet pet;
-    private boolean maquina;
+    private boolean maquinaEmUso;
 
 
 
-    public PetMachine(Pet pet) {
+    public PetMachine() {
         this.agua = 30;
         this.shampoo = 10;
-        this.pet = pet;
+        this.maquinaEmUso = false;
     }
 
     public void darBanho() {
@@ -56,19 +56,21 @@ public class PetMachine {
     }
 
     public void inserirPetNaMaquina() {
-
-        if () {
-
-        }
-
+        if (!this.maquinaEmUso) {
+            System.out.println(this.pet + " está na máquina.");
+        } else
+            System.out.println("A máquina está limpa?");
     }
 
     public void retirarPetDaMaquina() {
-
+        if (this.maquinaEmUso) {
+            System.out.println("Máquina em uso, pet ainda está na máquina.");
+        } else
+            System.out.println( "Retirar " + this.pet + " da máquina.");
     }
 
     public void limparMaquina() {
-        if (true) {
+        if (this.maquinaEmUso) {
             this.agua = this.agua - 3;
             this.shampoo = this.shampoo - 1;
             System.out.println("Máquina limpa.");
@@ -100,12 +102,14 @@ public class PetMachine {
         this.pet = pet;
     }
 
-    public boolean getMaquina() {
-        return maquina;
+    public boolean getMaquinaEmUso() {
+        return maquinaEmUso;
     }
 
-    public void setMaquina(boolean maquina) {
-        this.maquina = maquina;
+    public void setMaquinaEmUso(boolean maquinaEmUso) {
+        this.maquinaEmUso = maquinaEmUso;
     }
+
+
 }
 

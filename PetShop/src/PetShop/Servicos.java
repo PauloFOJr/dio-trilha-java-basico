@@ -6,7 +6,8 @@ public class Servicos {
 //        pet[0] = new Pet;
 //        pet[1] = new Pet("Olivia");
 //        pet[2] = new Pet("Gringa");
-        PetMachine pm = new PetMachine(pet);
+        PetMachine pm = new PetMachine();
+
         pm.darBanho();
 
 
