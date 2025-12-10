@@ -1,81 +1,53 @@
 package PetShop;
 
 public class PetMachine {
-    private double agua;
-    private double shampoo;
+    private double agua = 30;
+    private double shampoo = 10;
     private Pet pet;
-    private boolean maquinaEmUso;
-
-
-
-    public PetMachine() {
-        this.agua = 30;
-        this.shampoo = 10;
-        this.maquinaEmUso = false;
-    }
+    private boolean limpo = true;
 
     public void darBanho() {
-        verificarNivelAgua();
-        verificarNivelShampoo();
-        inserirPetNaMaquina();
-        retirarPetDaMaquina();
-        limparMaquina();
+        if (this.pet == null) {
+            System.out.println("Coloque o pet na máquina para iniciar o banho");
+            return;
+        }
+        this.agua -= 10;
+        this.shampoo -= 2;
+        pet.setPetLimpo(true);
+        System.out.println("O pet " + pet.getNome() + " está limpo.");
     }
 
     public void abastecerAgua() {
-        if (this.agua < 30) {
-            do this.agua++;
-            while (this.agua == 30);
+        if (agua == 30) {
+            System.out.println("A capacidade de água da máquina está no máximo");
+            return;
         }
-
+        agua += 2;
     }
 
     public void abastecerShampoo() {
-        if (this.shampoo < 10) {
-            do this.shampoo++;
-            while (this.shampoo == 10);
+        if (shampoo == 10) {
+            System.out.println("A capacidade de shampoo da máquina está no máximo");
+            return;
         }
+        shampoo += 2;
     }
 
-    public void verificarNivelAgua() {
-        if (this.agua < 30) {
-            abastecerAgua();
-            System.out.println("Abastecendo de água");
-        } else {
-            System.out.println("Abastecido");
-        }
-    }
-
-    public void verificarNivelShampoo() {
-        if (this.agua < 10) {
-            abastecerShampoo();
-            System.out.println("Abastecendo de shampoo");
-        } else {
-            System.out.println("Abastecido");
-        }
-    }
-
-    public void inserirPetNaMaquina() {
-        if (!this.maquinaEmUso) {
-            System.out.println(this.pet + " está na máquina.");
-        } else
-            System.out.println("A máquina está limpa?");
+    public boolean temPet() {
+        return  pet != null;
     }
 
     public void retirarPetDaMaquina() {
-        if (this.maquinaEmUso) {
-            System.out.println("Máquina em uso, pet ainda está na máquina.");
-        } else
-            System.out.println( "Retirar " + this.pet + " da máquina.");
+        this.limpo = this.pet.isPetLimpo();
+        System.out.println("O pet " + this.pet.getNome() + " foi retirado da máquina.");
+        this.pet = null;
     }
 
     public void limparMaquina() {
-        if (this.maquinaEmUso) {
-            this.agua = this.agua - 3;
-            this.shampoo = this.shampoo - 1;
-            System.out.println("Máquina limpa.");
-        } else
-            System.out.println("Máquina necessita de limpeza");
+        this.agua -= 3;
+        this.shampoo -= 1;
+        this.limpo = true;
+        System.out.println("A máquina foi limpa");
     }
 
     public double getAgua() {
@@ -99,17 +71,24 @@ public class PetMachine {
     }
 
     public void setPet(Pet pet) {
+        if (!this.limpo){
+            System.out.println("A máquina está suja, para colocar o pet é necessário limpa-lá;");
+            return;
+        }
+        if (temPet()) {
+            System.out.println("O pet " + this.pet.getNome() + " está na máquina nesse momento.");
+            return;
+        }
         this.pet = pet;
+        System.out.println("O pet " + pet.getNome() + " foi colocado na máquina.");
     }
 
-    public boolean getMaquinaEmUso() {
-        return maquinaEmUso;
+    public boolean getLimpo() {
+        return limpo;
     }
 
-    public void setMaquinaEmUso(boolean maquinaEmUso) {
-        this.maquinaEmUso = maquinaEmUso;
+    public void setLimpo(boolean limpo) {
+        this.limpo = limpo;
     }
-
-
 }
 
